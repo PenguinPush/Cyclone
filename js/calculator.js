@@ -80,10 +80,10 @@ export function getPhases(age, weight, height, lastMenstruation, menstrualFlowDu
 
     // return info
     return {
-        follicularStart: follicularStart.toDateString(),
-        ovulationStart: ovulationStart.toDateString(),
-        lutealStart: lutealStart.toDateString(),
-        menstruationStart: menstruationStart.toDateString(),
+        follicularStart: follicularStart,
+        ovulationStart: ovulationStart,
+        lutealStart: lutealStart,
+        menstruationStart: menstruationStart,
         daysToMenstruation: daysToMenstruation,
         dayOfCycle: dayOfCycle,
         currentPhase: currentPhase
