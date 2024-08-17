@@ -1,3 +1,50 @@
-.notification {
+.stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
+.stat-box {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+}
+
+.stat-box p {
+    margin: 0;
+    color: #555;
+}
+
+.stat-box h2 {
+    margin: 10px 0 0;
+    color: #333;
+}
+
+#update-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 50px;
+}
+
+#update-info a {
+    font-weight: bold;
+    font-size: 2em;
+
+    padding: 20px 30px;
+}
+
+#update-info a::after {
+    bottom: 20px;
+    height: 2px;
+}
+
+#update-info a:hover::after {
+    left: 30px;
+    right: 30px;
 }

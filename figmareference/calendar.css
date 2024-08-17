@@ -35,7 +35,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-image: url(../public/figma@3x.png);
+  background-image: url(public/figma@3x.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -957,7 +957,7 @@
   flex-direction: column;
   justify-content: flex-start;
   padding: 0 0 var(--padding-11xl);
-  background-image: url(../public/modal-date-picker@3x.png);
+  background-image: url(public/modal-date-picker@3x.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;

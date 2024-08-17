@@ -8,10 +8,39 @@
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
+<nav class="navbar">
+    <div class="logo"><a href="index.html"><img src="public/logo.png"></a></div>
+    <ul class="navbar-button">
+        <li><a href="dashboard.html" class="active">Home</a></li>
+        <li><a href="map.html">Menstrual Map</a></li>
+        <li><a href="products.html">Find Products</a></li>
+        <li><a href="peppa.html">PEPPA.AI</a></li>
+        <li><a href="cyclash.html">Cyclash</a></li>
+    </ul>
+</nav>
 <script type="module" src="js/dashboard.js"></script>
-
 <div class="container">
-    <div class="notification"><h1>Your next period is predicted to happen on ${date}</h1></div>
+    <div id="next-period"><h1>Your next period is predicted to happen on !{1}.</h1></div>
+
+    <div class="stats">
+        <div class="stat-box" id="stats-period">
+            <p>Period in:</p>
+            <h2>!{1} day!{2}</h2>
+        </div>
+        <div class="stat-box" id="stats-phase">
+            <p>Current phase:</p>
+            <h2>!{1}</h2>
+        </div>
+        <div class="stat-box" id="stats-cycle">
+            <p>Cycle day:</p>
+            <h2>!{1} out of !{2}</h2>
+        </div>
+    </div>
+    <div id="update-info">
+        <div class="button">
+            <a href="input_data.html">Update My Info</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

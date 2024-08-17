@@ -1,4 +1,4 @@
-import {getPhases} from "./calculator.js";
+import {calculatePhases} from "./calculator.js";
 
 const DATE_FORMAT = {
     weekday: 'long',
@@ -7,40 +7,77 @@ const DATE_FORMAT = {
     day: 'numeric',
 }
 
+const VALUES = [
+    "age",
+    "weight",
+    "height",
+    "lmp",
+    "flowtime",
+    "diet",
+    "exercise",
+    "freaky",
+    "flow"
+]
+
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('input[type="submit"]').addEventListener('click', function (event) {
+    setDefaults();
+
+    VALUES.forEach(value => {
+        let element = document.getElementById(value)
+        element.addEventListener('change', () => {
+            localStorage.setItem(value, element.value)
+        })
+    })
+
+    document.querySelector('input[type="submit"]').addEventListener('click', (event) => {
         event.preventDefault();
-
-        const age = parseInt(document.getElementById('age').value);
-        const weight = parseInt(document.getElementById('weight').value);
-        const height = parseInt(document.getElementById('height').value);
-        const lastMenstruation = document.getElementById('lmp').value;
-        const menstrualFlowDuration = parseInt(document.getElementById('flowtime').value);
-        const caloricIntake = parseInt(document.getElementById('diet').value);
-        const exercise = parseInt(document.getElementById('exercise').value);
-        const sexualActivity = parseInt(document.getElementById('freaky').value);
-        const flowVolume = parseInt(document.getElementById('flow').value);
-
-        const result = getPhases(age, weight, height, lastMenstruation, menstrualFlowDuration, caloricIntake, exercise, sexualActivity, flowVolume);
-
-        if (result.error) {
-            alert(result.error)
-        } else {
-            alert(`Follicular Start: ${result.follicularStart.toLocaleDateString(undefined, DATE_FORMAT)}
-            \nOvulation Start: ${result.ovulationStart.toLocaleDateString(undefined, DATE_FORMAT)}
-            \nLuteal Start: ${result.lutealStart.toLocaleDateString(undefined, DATE_FORMAT)}
-            \nMenstrual Phase Start: ${result.menstruationStart.toLocaleDateString(undefined, DATE_FORMAT)}
-            \nDays to Menstruation: ${result.daysToMenstruation}
-            \nDay of Cycle: ${result.dayOfCycle}
-            \nCurrent Phase: ${result.currentPhase}`);
-
-            localStorage.setItem("follicularStart", toString(result.follicularStart));
-            localStorage.setItem("ovulationStart", toString(result.ovulationStart));
-            localStorage.setItem("lutealStart", toString(result.lutealStart));
-            localStorage.setItem("menstruationStart", toString(result.menstruationStart));
-            localStorage.setItem("daysToMenstruation", toString(result.daysToMenstruation));
-            localStorage.setItem("dayOfCycle", toString(result.dayOfCycle));
-            localStorage.setItem("currentPhase", toString(result.currentPhase));
-        }
+        calculateData()
     });
 });
+
+function setDefaults() {
+    VALUES.forEach(value => {
+        if (localStorage.getItem(value)) {
+            document.getElementById(value).value = localStorage.getItem(value)
+        }
+    })
+}
+
+function calculateData() {
+    const age = parseInt(localStorage.getItem("age"));
+    const weight = parseInt(localStorage.getItem("weight"));
+    const height = parseInt(localStorage.getItem("height"));
+    const lmp = new Date(localStorage.getItem("lmp"));
+    const flowtime = parseInt(localStorage.getItem("flowtime"));
+    const diet = parseInt(localStorage.getItem("diet"));
+    const exercise = parseInt(localStorage.getItem("exercise"));
+    const freaky = parseInt(localStorage.getItem("freaky"));
+    const flow = parseInt(localStorage.getItem("flow"));
+
+    const result = calculatePhases(age, weight, height, lmp, flowtime, diet, exercise, freaky, flow);
+
+    if (result.error) {
+        alert(result.error)
+    } else {
+        localStorage.setItem("lastMenstruation", new Date(lmp).toString());
+        localStorage.setItem("cycleLength", result.cycleLength.toString());
+        localStorage.setItem("follicularStart", result.follicularStart.toString());
+        localStorage.setItem("ovulationStart", result.ovulationStart.toString());
+        localStorage.setItem("lutealStart", result.lutealStart.toString());
+        localStorage.setItem("menstruationStart", result.menstruationStart.toString());
+
+        window.location.href = "dashboard.html";
+    }
+}
+
+function changePage(id){
+    let pages = document.querySelectorAll('.page');
+
+    pages.forEach((page) => {
+        page.style.transform = 'translateX(100%)';
+    });
+
+    document.getElementById(id).style.transform = 'translateX(0)';
+}
+
+window.changePage = changePage;

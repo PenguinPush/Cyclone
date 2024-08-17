@@ -1,18 +1,18 @@
-export function getCurrentPhase(startDate, cycleLength, menstruationStart, follicularStart, ovulationStart, lutealStart) {
+export function getCurrentPhase(lastMenstruation, cycleLength, follicularStart, ovulationStart, lutealStart, menstruationStart) {
     let today = new Date();
-    let dayOfCycle = Math.ceil((today - startDate) / (1000 * 60 * 60 * 24));
+    let dayOfCycle = Math.ceil((today - lastMenstruation) / (1000 * 60 * 60 * 24));
     let daysToMenstruation = Math.max(Math.ceil((menstruationStart - today) / (1000 * 60 * 60 * 24) - 1), 0); // convert from milliseconds to days
 
     // determine current phase
-    let currentPhase;
-    if (menstruationStart < today) {
-        currentPhase = 'Menstrual';
-    } else if (follicularStart < today) {
+    let currentPhase = 'Menstrual';
+    if (follicularStart <= today) {
         currentPhase = 'Follicular';
-    } else if (ovulationStart < today) {
+    } if (ovulationStart <= today) {
         currentPhase = 'Ovulation';
-    } else if (lutealStart < today){
+    } if (lutealStart <= today){
         currentPhase = 'Luteal';
+    } if (menstruationStart <= today) {
+        currentPhase = 'Menstrual';
     }
 
     return {
@@ -22,7 +22,7 @@ export function getCurrentPhase(startDate, cycleLength, menstruationStart, folli
     };
 }
 
-export function getPhases(age, weight, height, lastMenstruation, menstrualFlowDuration, caloricIntake, exercise, sexualActivity, flowVolume) {
+export function calculatePhases(age, weight, height, lastMenstruation, menstrualFlowDuration, caloricIntake, exercise, sexualActivity, flowVolume) {
     let startDate = new Date(lastMenstruation);
     let menstruationDelta = (Date.now() - startDate) / (1000 * 60 * 60 * 24)
 
@@ -60,32 +60,26 @@ export function getPhases(age, weight, height, lastMenstruation, menstrualFlowDu
         cycleLength = menstruationDelta // if your last menstruation was a little far away, just assume the next one is probably tomorrow
     }
 
+    cycleLength = Math.round(cycleLength);
+
     let follicularStart = new Date(startDate);
     let ovulationStart = new Date(startDate);
     let lutealStart = new Date(startDate);
     let menstruationStart = new Date(startDate);
+    console.log(follicularPhase, ovulationPhase, lutealPhase, menstrualPhase)
 
     // calculate dates
     follicularStart.setDate(startDate.getDate() + menstrualPhase);
-    ovulationStart.setDate(follicularStart.getDate() + follicularPhase);
-    lutealStart.setDate(ovulationStart.getDate() + ovulationPhase);
+    ovulationStart.setDate(startDate.getDate() + follicularPhase + menstrualPhase);
+    lutealStart.setDate(startDate.getDate() + ovulationPhase + follicularPhase + menstrualPhase);
     menstruationStart.setDate(startDate.getDate() + cycleLength);
-
-    // calculate day and phase
-    let {
-        dayOfCycle,
-        currentPhase,
-        daysToMenstruation,
-    } = getCurrentPhase(startDate, cycleLength, menstruationStart, follicularPhase, ovulationPhase, lutealPhase);
 
     // return info
     return {
+        cycleLength: cycleLength,
         follicularStart: follicularStart,
         ovulationStart: ovulationStart,
         lutealStart: lutealStart,
         menstruationStart: menstruationStart,
-        daysToMenstruation: daysToMenstruation,
-        dayOfCycle: dayOfCycle,
-        currentPhase: currentPhase
     };
 }
