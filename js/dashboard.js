@@ -32,6 +32,7 @@ function loadData() {
         for (let item of FETCHED_DATA) {
             if (!item) {
                 reject("Missing localStorage data! Go to input_data.html");
+                window.location.href = "input_data.html";
                 return;
             } else {
                 console.log(item)
