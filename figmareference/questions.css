@@ -53,7 +53,7 @@
   display: none;
   justify-content: flex-start;
   gap: var(--gap-5xl);
-  background-image: url(./public/block@3x.png);
+  background-image: url(../public/block@3x.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
