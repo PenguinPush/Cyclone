@@ -33,6 +33,8 @@ function loadData() {
             if (!item) {
                 reject("Missing localStorage data! Go to input_data.html");
                 return;
+            } else {
+                console.log(item)
             }
         }
 

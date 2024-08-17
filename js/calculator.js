@@ -66,7 +66,6 @@ export function calculatePhases(age, weight, height, lastMenstruation, menstrual
     let ovulationStart = new Date(startDate);
     let lutealStart = new Date(startDate);
     let menstruationStart = new Date(startDate);
-    console.log(follicularPhase, ovulationPhase, lutealPhase, menstrualPhase)
 
     // calculate dates
     follicularStart.setDate(startDate.getDate() + menstrualPhase);

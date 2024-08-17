@@ -1,10 +1,70 @@
-.page {
-    transform: translateX(100%);
-    transition: transform 0.5s ease-out;
-    position: absolute;
+body, html {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
     width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    transition: transform 0.5s ease-in-out;
+    position: absolute;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.page > div {
+    max-width: 600px;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.page > div > label {
+    margin: 0 10px;
+}
+
+.page .button {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+#progress {
+    transition: width 0.5s ease-in-out;
+
+    position: absolute;
+    width: 0%;
+    left: 0;
+    height: 10px;
+    bottom: 0;
+    background: lightskyblue;
 }
 
 #page1 {
-    transform: translateX(0);
+    transform: translateY(0%);
+}
+
+#page2 {
+    transform: translateY(100%);
+}
+
+#page3 {
+    transform: translateY(200%);
 }

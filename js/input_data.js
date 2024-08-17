@@ -59,6 +59,8 @@ function calculateData() {
     if (result.error) {
         alert(result.error)
     } else {
+        changePage(-1);
+
         localStorage.setItem("lastMenstruation", new Date(lmp).toString());
         localStorage.setItem("cycleLength", result.cycleLength.toString());
         localStorage.setItem("follicularStart", result.follicularStart.toString());
@@ -66,18 +68,23 @@ function calculateData() {
         localStorage.setItem("lutealStart", result.lutealStart.toString());
         localStorage.setItem("menstruationStart", result.menstruationStart.toString());
 
-        window.location.href = "dashboard.html";
+        setTimeout(function () {
+            window.location.href = "dashboard.html";
+        }, 500);
+
     }
 }
 
-function changePage(id){
-    let pages = document.querySelectorAll('.page');
+function changePage(id) {
+    let page1 = document.querySelector('#page1');
+    let page2 = document.querySelector('#page2');
+    let page3 = document.querySelector('#page3');
+    let progress = document.querySelector('#progress');
 
-    pages.forEach((page) => {
-        page.style.transform = 'translateX(100%)';
-    });
-
-    document.getElementById(id).style.transform = 'translateX(0)';
+    page1.style.transform = `translateY(${(id - 2) * 100}%)`;
+    page2.style.transform = `translateY(${(id - 1) * 100}%)`;
+    page3.style.transform = `translateY(${(id) * 100}%)`;
+    progress.style.width = `${(100 - (100 / 3) * (id + 1))}%`
 }
 
 window.changePage = changePage;
