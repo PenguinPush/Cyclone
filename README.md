@@ -1,4 +1,4 @@
-# Cyclone 🌪️
+# [Cyclone 🌪️](https://penguinpush.github.io/Cyclone/input_data.html)
 
 **Cyclone** is an AI-powered platform designed to help users navigate their menstrual cycle with confidence and ease. It goes beyond just tracking periods—Cyclone addresses the broader issues of menstrual health, period poverty, and education, offering a comprehensive solution for users.
 
