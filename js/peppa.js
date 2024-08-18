@@ -17,7 +17,12 @@ async function extractKeys(apiUrl) {
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
+    const sendButton = document.getElementById('send-button')
+    const inputBox = document.getElementById('input-box')
+    const inputDiv = document.getElementById('input-div')
+
     let [assistantID, apiKey] = await extractKeys(apiUrl)
+    let threadID
 
     async function createThread() {
         const response = await fetch('https://api.openai.com/v1/threads', {
@@ -27,7 +32,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                 'Authorization': `Bearer ${apiKey}`,
                 'OpenAI-Beta': 'assistants=v2'
             },
-            body: "{}"
+            body: "{\n" +
+                "    \"messages\": [{\n" +
+                "      \"role\": \"user\",\n" +
+                "      \"content\": \"Introduce yourself briefly!\"\n" +
+                "    }]\n" +
+                "  }"
         });
 
         if (!response.ok) {
@@ -39,6 +49,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     async function sendMessage(threadID, message) {
+        inputBox.value = ""
+        inputDiv.style = "pointer-events: none;"
+
         const response = await fetch(`https://api.openai.com/v1/threads/${threadID}/messages`, {
             method: 'POST',
             headers: {
@@ -54,6 +67,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             throw new Error('Failed to send message');
         }
 
+        displayMessage(message, 'userMessage');
         return await response.json();
     }
 
@@ -143,7 +157,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 throw new Error('Failed to fetch thread messages');
             }
 
-            return await response.json();
+            const messages = await response.json();
+            displayMessage(messages.data[0].content[0].text.value, 'botMessage');
+            inputDiv.style = "pointer-events: visible;"
+
         } catch (error) {
             console.error('Error fetching thread messages:', error);
             throw error;
@@ -152,7 +169,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     async function initializeThread() {
         const thread = await createThread();
-        const threadID = thread.id;
+        threadID = thread.id;
         console.log('Thread created:', threadID);
 
         const messageRun = await runResponse(threadID);
@@ -161,8 +178,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const runProcessed = await awaitRun(messageRun.id, threadID)
         console.log('Processed run:', runProcessed);
 
-        const threadContents = await getThreadResponse(threadID)
-        displayMessage(threadContents.data[0].content[0].text.value, 'botMessage');
+        await getThreadResponse(threadID)
     }
 
     function displayMessage(messageText, messageType) {
@@ -174,5 +190,27 @@ document.addEventListener('DOMContentLoaded', async function () {
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
 
-    initializeThread()
+    addEventListener("submit", async (event) => {
+        event.preventDefault();
+    });
+
+    initializeThread().then(() => {
+        sendButton.addEventListener("click", () => {
+            sendButton.parentElement.requestSubmit()
+        })
+
+        addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            await sendMessage(threadID, inputBox.value.trim())
+
+            const messageRun = await runResponse(threadID);
+            console.log('Created run:', messageRun);
+
+            const runProcessed = await awaitRun(messageRun.id, threadID)
+            console.log('Processed run:', runProcessed);
+
+            await getThreadResponse(threadID)
+        });
+    })
 });
