@@ -70,7 +70,7 @@ function calculateData() {
         localStorage.setItem("flowtime", flowtime.toString());
 
         setTimeout(function () {
-            window.location.href = "dashboard.html";
+            window.location.href = "index.html";
         }, 500);
 
     }
