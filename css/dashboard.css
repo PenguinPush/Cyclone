@@ -1,20 +1,26 @@
+#next-period {
+    margin-bottom: 40px;
+}
+
 .stats {
+    margin-bottom: 20px;
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.stat-box {
+.stat-box, .week-forecast {
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex-grow: 1;
+    width: 0;
 }
 
-.stat-box p {
+.stat-box p, .week-forecast p {
     margin: 0;
     color: #555;
 }
@@ -22,6 +28,17 @@
 .stat-box h2 {
     margin: 10px 0 0;
     color: #333;
+}
+
+.week-icon {
+    background-image: url("../public/Menstrual.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0 20px;
+    margin-top: 20px;
+    width: auto;
+    height: 100px;
 }
 
 #update-info {

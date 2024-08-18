@@ -44,15 +44,15 @@ function setDefaults() {
 }
 
 function calculateData() {
-    const age = parseInt(localStorage.getItem("age"));
-    const weight = parseInt(localStorage.getItem("weight"));
-    const height = parseInt(localStorage.getItem("height"));
-    const lmp = new Date(localStorage.getItem("lmp"));
-    const flowtime = parseInt(localStorage.getItem("flowtime"));
-    const diet = parseInt(localStorage.getItem("diet"));
-    const exercise = parseInt(localStorage.getItem("exercise"));
-    const freaky = parseInt(localStorage.getItem("freaky"));
-    const flow = parseInt(localStorage.getItem("flow"));
+    const age = parseInt(document.getElementById("age").value);
+    const weight = parseInt(document.getElementById("weight").value);
+    const height = parseInt(document.getElementById("height").value);
+    const lmp = new Date(document.getElementById("lmp").value);
+    const flowtime = parseInt(document.getElementById("flowtime").value);
+    const diet = parseInt(document.getElementById("diet").value);
+    const exercise = parseInt(document.getElementById("exercise").value);
+    const freaky = parseInt(document.getElementById("freaky").value);
+    const flow = parseInt(document.getElementById("flow").value);
 
     const result = calculatePhases(age, weight, height, lmp, flowtime, diet, exercise, freaky, flow);
 

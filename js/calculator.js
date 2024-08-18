@@ -1,5 +1,4 @@
-export function getCurrentPhase(lastMenstruation, cycleLength, follicularStart, ovulationStart, lutealStart, menstruationStart) {
-    let today = new Date();
+export function getCurrentPhase(lastMenstruation, cycleLength, follicularStart, ovulationStart, lutealStart, menstruationStart, today) {
     let dayOfCycle = Math.ceil((today - lastMenstruation) / (1000 * 60 * 60 * 24));
     let daysToMenstruation = Math.max(Math.ceil((menstruationStart - today) / (1000 * 60 * 60 * 24) - 1), 0); // convert from milliseconds to days
 
