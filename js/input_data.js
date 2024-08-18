@@ -19,6 +19,8 @@ const VALUES = [
     "flow"
 ]
 
+let pageId;
+
 document.addEventListener('DOMContentLoaded', function () {
     setDefaults();
 
@@ -31,7 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('input[type="submit"]').addEventListener('click', (event) => {
         event.preventDefault();
-        calculateData()
+        if (pageId === 0) {
+            calculateData()
+        }
     });
 });
 
@@ -86,6 +90,8 @@ function changePage(id) {
     page2.style.transform = `translateY(${(id - 1) * 100}%)`;
     page3.style.transform = `translateY(${(id) * 100}%)`;
     progress.style.width = `${(100 - (100 / 3) * (id + 1))}%`
+
+    pageId = id
 }
 
 window.changePage = changePage;
