@@ -1,0 +1,41 @@
+#messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+#message-bar {
+    position: absolute;
+    width: 60%;
+    bottom: 40px;
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+}
+
+.userMessage {
+    background-color: #e1ffc7;
+    align-self: flex-end;
+}
+
+.botMessage {
+    background-color: #f1f1f1;
+    align-self: flex-start;
+}

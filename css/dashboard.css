@@ -42,26 +42,30 @@
 }
 
 #update-info {
-    position: absolute;
+    position: relative;
     left: 0;
     right: 0;
-    margin: auto;
-    bottom: 50px;
+    margin: 10px;
 }
 
 #update-info a {
     font-weight: bold;
     font-size: 2em;
-
+    color: #1e1e1e;
     padding: 20px 30px;
 }
 
 #update-info a::after {
     bottom: 20px;
     height: 2px;
+    background-color: #1e1e1e
 }
 
 #update-info a:hover::after {
     left: 30px;
     right: 30px;
+}
+
+#calendar {
+    width: 100%;
 }

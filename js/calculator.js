@@ -1,17 +1,25 @@
-export function getCurrentPhase(lastMenstruation, cycleLength, follicularStart, ovulationStart, lutealStart, menstruationStart, today) {
+export function getCurrentPhase(lastMenstruation, cycleLength, follicularStart, ovulationStart, lutealStart, menstruationStart, mensturalFlowDuration, today) {
     let dayOfCycle = Math.ceil((today - lastMenstruation) / (1000 * 60 * 60 * 24));
     let daysToMenstruation = Math.max(Math.ceil((menstruationStart - today) / (1000 * 60 * 60 * 24) - 1), 0); // convert from milliseconds to days
+    let menstruationEnd = new Date()
+    menstruationEnd.setDate(menstruationStart.getDate() + mensturalFlowDuration);
 
     // determine current phase
     let currentPhase = 'Menstrual';
     if (follicularStart <= today) {
         currentPhase = 'Follicular';
-    } if (ovulationStart <= today) {
+    }
+    if (ovulationStart <= today) {
         currentPhase = 'Ovulation';
-    } if (lutealStart <= today){
+    }
+    if (lutealStart <= today) {
         currentPhase = 'Luteal';
-    } if (menstruationStart <= today) {
+    }
+    if (menstruationStart <= today) {
         currentPhase = 'Menstrual';
+    }
+    if (menstruationEnd <= today) {
+        currentPhase = 'Follicular';
     }
 
     return {

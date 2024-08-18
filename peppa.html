@@ -3,28 +3,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cyclone | Menstrual Map</title>
+    <title>Cyclone | PEPPA.AI</title>
     <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/peppa.css">
 </head>
 <body>
 <script src="js/global.js"></script>
+<script src="js/peppa.js"></script>
 <div id="overlay"></div>
 <nav class="navbar">
     <div class="logo"><a href="index.html"><img src="public/logo.png"></a></div>
     <ul class="navbar-button">
         <li><a href="dashboard.html">Home</a></li>
-        <li><a href="map.html" class="active">Menstrual Map</a></li>
+        <li><a href="map.html">Menstrual Map</a></li>
         <li><a href="products.html">Find Products</a></li>
-        <li><a href="peppa.html">PEPPA.AI</a></li>
+        <li><a href="peppa.html" class="active">PEPPA.AI</a></li>
         <li><a href="cyclash.html">Cyclash</a></li>
     </ul>
 </nav>
 <div class="container">
-    <h2>Find free menstrual products in your area.</h2>
-    <iframe width="800" height="600" style="border:0" loading="lazy" allowfullscreen
-            src="https://www.google.com/maps/embed/v1/search?q=washroom&key=AIzaSyA95gnzrLCx1-kErO3r9ELxYnohGNHnnAo"></iframe>
-    <p>Powered by Google.</p>
+    <h1>PEPPA.AI</h1>
+    <div id="chat-container">
+        <div id="messages"></div>
+        <div id="message-bar">
+            <input type="text" placeholder="You're free to talk about whatever!"/>
+            <div id="send-button" class="button"><a>Send</a></div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

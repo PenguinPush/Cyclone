@@ -22,6 +22,7 @@ function loadData() {
         let ovulationStart = new Date(Date.parse(localStorage.getItem("ovulationStart")));
         let lutealStart = new Date(Date.parse(localStorage.getItem("lutealStart")));
         let menstruationStart = new Date(Date.parse(localStorage.getItem("menstruationStart")));
+        let flowtime = Number(localStorage.getItem("flowtime"));
 
         const FETCHED_DATA = [
             lastMenstruation,
@@ -29,7 +30,8 @@ function loadData() {
             follicularStart,
             ovulationStart,
             lutealStart,
-            menstruationStart
+            menstruationStart,
+            flowtime
         ];
 
         for (let item of FETCHED_DATA) {
@@ -58,39 +60,40 @@ function updateSite(FETCHED_DATA) {
     }
 
     let today = new Date(Date.now())
-    let [lastMenstruation, cycleLength, follicularStart, ovulationStart, lutealStart, menstruationStart] = FETCHED_DATA;
-    let currentPhaseData = getCurrentPhase(...FETCHED_DATA, new Date())
+    let [lastMenstruation, cycleLength, follicularStart, ovulationStart, lutealStart, menstruationStart, flowtime] = FETCHED_DATA;
+    let currentPhaseData = getCurrentPhase(...FETCHED_DATA, new Date());
 
-    let daysOfCycle = currentPhaseData.dayOfCycle
-    let currentPhase = currentPhaseData.currentPhase
-    let daysToMenstruation = currentPhaseData.daysToMenstruation
+    let daysOfCycle = currentPhaseData.dayOfCycle;
+    let currentPhase = currentPhaseData.currentPhase;
+    let daysToMenstruation = currentPhaseData.daysToMenstruation;
 
-    updateText(nextPeriod, menstruationStart.toLocaleDateString(undefined, DATE_FORMAT_LONG_NOYEAR), 1)
+    updateText(nextPeriod, menstruationStart.toLocaleDateString(undefined, DATE_FORMAT_LONG_NOYEAR), 1);
 
-    updateText(statsPeriod, daysToMenstruation, 1)
-    updateText(statsPeriod, daysToMenstruation, 2, true)
-    updateText(statsPhase, currentPhase, 1)
-    updateText(statsCycle, daysOfCycle, 1)
-    updateText(statsCycle, cycleLength, 2)
+    updateText(statsPeriod, daysToMenstruation, 1);
+    updateText(statsPeriod, daysToMenstruation, 2, true);
+    updateText(statsPhase, currentPhase, 1);
+    updateText(statsCycle, daysOfCycle, 1);
+    updateText(statsCycle, cycleLength, 2);
 
     for (let i = 0; i < 7; i++) {
-        let weekday = new Date()
-        weekday.setDate(today.getDate() + i)
-        updateText(weekForecast[i], weekday.toLocaleDateString(undefined, DATE_FORMAT_WEEKDAY), 1)
+        let weekday = new Date();
+        weekday.setDate(today.getDate() + i);
+        updateText(weekForecast[i], weekday.toLocaleDateString(undefined, DATE_FORMAT_WEEKDAY), 1);
 
-        let phase = getCurrentPhase(...FETCHED_DATA, weekday).currentPhase
-        weekIcons[i].style.backgroundImage = `url(../public/${phase}.png)`
+        let phase = getCurrentPhase(...FETCHED_DATA, weekday).currentPhase;
+        weekIcons[i].style.backgroundImage = `url(../public/${phase}.png)`;
+        weekForecast[i].title = phase;
     }
 }
 
 function updateText(element, text, id, plural = false) {
     if (plural) {
         if (text !== 1) {
-            element.innerHTML = element.innerHTML.replace(`!{${id}}`, "s")
+            element.innerHTML = element.innerHTML.replace(`!{${id}}`, "s");
         } else {
-            element.innerHTML = element.innerHTML.replace(`!{${id}}`, "")
+            element.innerHTML = element.innerHTML.replace(`!{${id}}`, "");
         }
     } else {
-        element.innerHTML = element.innerHTML.replace(`!{${id}}`, text)
+        element.innerHTML = element.innerHTML.replace(`!{${id}}`, text);
     }
 }

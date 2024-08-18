@@ -67,6 +67,7 @@ function calculateData() {
         localStorage.setItem("ovulationStart", result.ovulationStart.toString());
         localStorage.setItem("lutealStart", result.lutealStart.toString());
         localStorage.setItem("menstruationStart", result.menstruationStart.toString());
+        localStorage.setItem("flowtime", flowtime.toString());
 
         setTimeout(function () {
             window.location.href = "dashboard.html";
