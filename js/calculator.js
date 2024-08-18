@@ -5,21 +5,21 @@ export function getCurrentPhase(lastMenstruation, cycleLength, follicularStart, 
     menstruationEnd.setDate(menstruationStart.getDate() + mensturalFlowDuration);
 
     // determine current phase
-    let currentPhase = 'Menstrual';
+    let currentPhase = 'menstrual';
     if (follicularStart <= today) {
-        currentPhase = 'Follicular';
+        currentPhase = 'follicular';
     }
     if (ovulationStart <= today) {
-        currentPhase = 'Ovulation';
+        currentPhase = 'ovulation';
     }
     if (lutealStart <= today) {
-        currentPhase = 'Luteal';
+        currentPhase = 'luteal';
     }
     if (menstruationStart <= today) {
-        currentPhase = 'Menstrual';
+        currentPhase = 'menstrual';
     }
     if (menstruationEnd <= today) {
-        currentPhase = 'Follicular';
+        currentPhase = 'follicular';
     }
 
     return {

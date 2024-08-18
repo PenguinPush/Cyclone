@@ -64,7 +64,7 @@ function updateSite(FETCHED_DATA) {
     let currentPhaseData = getCurrentPhase(...FETCHED_DATA, new Date());
 
     let daysOfCycle = currentPhaseData.dayOfCycle;
-    let currentPhase = currentPhaseData.currentPhase;
+    let currentPhase = currentPhaseData.currentPhase.charAt(0).toUpperCase() + currentPhaseData.currentPhase.slice(1); // capitalize lettering
     let daysToMenstruation = currentPhaseData.daysToMenstruation;
 
     updateText(nextPeriod, menstruationStart.toLocaleDateString(undefined, DATE_FORMAT_LONG_NOYEAR), 1);
