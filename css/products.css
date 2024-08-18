@@ -1,0 +1,62 @@
+form input {
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+form input {
+    margin-right: 10px;
+}
+
+.button {
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.button input {
+    all: unset;
+}
+
+button {
+    all: unset;
+    background-image: url("../public/gradient.jpg");
+
+    position: relative;
+    overflow: hidden;
+    padding: 10px 15px;
+
+    text-decoration: none;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    cursor: pointer;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    right: 50%;
+    height: 1px;
+    background: #fff;
+    transition: all 0.3s;
+}
+
+button:hover::after {
+    left: 15px;
+    right: 15px;
+}

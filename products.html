@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cyclone | Products</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/products.css">
+
+    <script>
+        function getAmazonLink(product, disposable, priceRange) {
+            let baseUrl = "https://www.amazon.ca/s?k=";
+            baseUrl += encodeURIComponent(product);
+            if (disposable) {
+                baseUrl += "&ref=sr_st_disposable";
+            }
+
+            let [lowPrice, highPrice] = priceRange.split("-");
+            let priceFilter = `&low-price=${encodeURIComponent(
+                lowPrice
+            )}&high-price=${encodeURIComponent(highPrice)}`;
+            baseUrl += priceFilter;
+
+            return baseUrl;
+        }
+
+        function generateLink() {
+            const product = document.getElementById("product").value;
+            const disposable = document.getElementById("disposable").checked;
+            const priceRange = document.getElementById("priceRange").value;
+
+            const amazonLink = getAmazonLink(product, disposable, priceRange);
+
+            window.open(amazonLink, '_blank').focus();
+        }
+    </script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="logo"><a href="index.html"><img src="public/logo.png"></a></div>
+    <ul class="navbar-button">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="map.html">Menstrual Map</a></li>
+        <li><a href="products.html" class="active">Find Products</a></li>
+        <li><a href="peppa.html">PEPPA.AI</a></li>
+        <li><a href="cyclash.html">Cyclash</a></li>
+    </ul>
+</nav>
+<div class="container">
+    <h1>Find Products</h1>
+
+    <form>
+        <label for="product">Product Name: </label><br/>
+        <input type="text" id="product" name="product" required/><br/><br/>
+
+        <label for="priceRange">Price Range (hyphen-separated): </label><br/>
+        <input
+                type="text"
+                id="priceRange"
+                name="priceRange"
+                required
+        />
+
+        <label for="disposable">Disposable: </label><br/>
+        <input type="checkbox" id="disposable" name="disposable"/><br/><br/>
+
+        <div class="button" id="get-link">
+            <a onclick="generateLink()">Get Link</a>
+            </div>
+        </div>
+    </form>
+    <p id="outputLink"></p>
+</div>
+</body>
+</html>
