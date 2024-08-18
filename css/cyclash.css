@@ -1,0 +1,17 @@
+input {
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#copy-container {
+    display: flex;
+    align-items: center;
+}
+
+#copy-container input {
+    flex-grow: 1;
+    margin-right: 10px;
+}
