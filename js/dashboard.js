@@ -81,7 +81,7 @@ function updateSite(FETCHED_DATA) {
         updateText(weekForecast[i], weekday.toLocaleDateString(undefined, DATE_FORMAT_WEEKDAY), 1);
 
         let phase = getCurrentPhase(...FETCHED_DATA, weekday).currentPhase;
-        weekIcons[i].style.backgroundImage = `url(../public/${phase}.png)`;
+        weekIcons[i].style.backgroundImage = `url(./public/${phase}.png)`;
         weekForecast[i].title = phase.charAt(0).toUpperCase() + phase.slice(1);
     }
 }
